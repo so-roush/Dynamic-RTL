@@ -1,5 +1,8 @@
 'use strict';
 
+// Browser polyfill for cross-browser compatibility
+const browserAPI = typeof browser !== 'undefined' ? browser : chrome;
+
 // Global variables
 let isEnabled = true;
 const SCRIPT_ID = 'dynamic-rtl-styles';
@@ -12,12 +15,12 @@ function initExtension() {
     }
 
     // Check if the extension is enabled for this domain
-    chrome.storage.sync.get(['disabledSites', 'enabledSites', 'defaultEnabled'], function(result) {
+    browserAPI.storage.sync.get(['disabledSites', 'enabledSites', 'defaultEnabled'], function (result) {
         const currentHost = window.location.hostname;
         const defaultEnabled = result.defaultEnabled !== undefined ? result.defaultEnabled : true;
         const disabledSites = result.disabledSites || [];
         const enabledSites = result.enabledSites || [];
-        
+
         if (defaultEnabled) {
             // Default enabled mode: site is enabled unless in disabledSites
             isEnabled = !disabledSites.includes(currentHost);
@@ -25,7 +28,7 @@ function initExtension() {
             // Default disabled mode: site is disabled unless in enabledSites
             isEnabled = enabledSites.includes(currentHost);
         }
-        
+
         if (isEnabled) {
             // Add styles and start processing
             addStyles();
@@ -40,7 +43,7 @@ function initExtension() {
 // Add CSS rules
 function addStyles() {
     if (document.getElementById(SCRIPT_ID)) return;
-    
+
     const style = document.createElement('style');
     style.id = SCRIPT_ID;
     style.textContent = `
@@ -106,11 +109,11 @@ function isPersianOrArabic(text) {
 // Check if the first word of text is Persian or Arabic
 function startsWithPersianOrArabic(text) {
     if (!text) return false;
-    
+
     // Remove leading whitespace and get the first word
     const trimmedText = text.trim();
     const firstWord = trimmedText.split(/\s+/)[0];
-    
+
     // Check if the first word contains Persian/Arabic characters
     return isPersianOrArabic(firstWord);
 }
@@ -120,38 +123,38 @@ function setupInputObservers() {
     // Find all input and textarea elements on the page
     function processInputs() {
         if (!isEnabled) return;
-        
+
         // Process all input fields
         const inputElements = document.querySelectorAll('input[type="text"], input[type="search"], input:not([type]), textarea');
         inputElements.forEach(setupInputElement);
-        
+
         // Process all contenteditable elements
         const editableElements = document.querySelectorAll('[contenteditable="true"], [contenteditable=""]');
         editableElements.forEach(setupEditableElement);
     }
-    
+
     // Process the document when it's ready
     if (document.readyState === 'loading') {
         document.addEventListener('DOMContentLoaded', processInputs);
     } else {
         processInputs();
     }
-    
+
     // Also process inputs when the page is fully loaded
     window.addEventListener('load', processInputs);
-    
+
     // Create a MutationObserver to detect new input elements
     const inputObserver = new MutationObserver(mutations => {
         if (!isEnabled) return;
-        
+
         let shouldProcessInputs = false;
-        
+
         mutations.forEach(mutation => {
             if (mutation.type === 'childList' && mutation.addedNodes.length) {
                 mutation.addedNodes.forEach(node => {
                     if (node.nodeType === Node.ELEMENT_NODE) {
                         // Check if the added node is an input or contains inputs
-                        if (node.tagName === 'INPUT' || node.tagName === 'TEXTAREA' || 
+                        if (node.tagName === 'INPUT' || node.tagName === 'TEXTAREA' ||
                             node.hasAttribute('contenteditable') ||
                             node.querySelector('input, textarea, [contenteditable]')) {
                             shouldProcessInputs = true;
@@ -160,12 +163,12 @@ function setupInputObservers() {
                 });
             }
         });
-        
+
         if (shouldProcessInputs) {
             processInputs();
         }
     });
-    
+
     // Start observing the document for added input elements
     inputObserver.observe(document.documentElement, {
         childList: true,
@@ -176,28 +179,28 @@ function setupInputObservers() {
 // Setup event handlers for an input element
 function setupInputElement(element) {
     if (!element || element.hasAttribute('data-rtl-listener')) return;
-    
+
     // Mark this element as processed
     element.setAttribute('data-rtl-listener', 'true');
-    
+
     // Check if the input already has Persian/Arabic text that starts with Persian/Arabic
-    if ((isPersianOrArabic(element.value) && startsWithPersianOrArabic(element.value)) || 
-        (element.hasAttribute('placeholder') && isPersianOrArabic(element.getAttribute('placeholder')) && 
-         startsWithPersianOrArabic(element.getAttribute('placeholder')))) {
+    if ((isPersianOrArabic(element.value) && startsWithPersianOrArabic(element.value)) ||
+        (element.hasAttribute('placeholder') && isPersianOrArabic(element.getAttribute('placeholder')) &&
+            startsWithPersianOrArabic(element.getAttribute('placeholder')))) {
         element.setAttribute('data-rtl', 'true');
         element.classList.add('rtl-input-active');
     }
-    
+
     // Add input event listener for real-time RTL detection
-    element.addEventListener('input', function() {
+    element.addEventListener('input', function () {
         if (isPersianOrArabic(this.value) && startsWithPersianOrArabic(this.value)) {
             this.setAttribute('data-rtl', 'true');
             this.classList.add('rtl-input-active');
         } else if (this.value.trim() === '') {
             // Only remove RTL if there's no placeholder with Persian/Arabic
-            if (!(this.hasAttribute('placeholder') && 
-                  isPersianOrArabic(this.getAttribute('placeholder')) && 
-                  startsWithPersianOrArabic(this.getAttribute('placeholder')))) {
+            if (!(this.hasAttribute('placeholder') &&
+                isPersianOrArabic(this.getAttribute('placeholder')) &&
+                startsWithPersianOrArabic(this.getAttribute('placeholder')))) {
                 this.removeAttribute('data-rtl');
                 this.classList.remove('rtl-input-active');
             }
@@ -207,16 +210,16 @@ function setupInputElement(element) {
             this.classList.remove('rtl-input-active');
         }
     });
-    
+
     // Also check on focus and blur
-    element.addEventListener('focus', function() {
+    element.addEventListener('focus', function () {
         if (isPersianOrArabic(this.value) && startsWithPersianOrArabic(this.value)) {
             this.setAttribute('data-rtl', 'true');
             this.classList.add('rtl-input-active');
         }
     });
-    
-    element.addEventListener('blur', function() {
+
+    element.addEventListener('blur', function () {
         if (isPersianOrArabic(this.value) && startsWithPersianOrArabic(this.value)) {
             this.setAttribute('data-rtl', 'true');
             this.classList.add('rtl-input-active');
@@ -225,9 +228,9 @@ function setupInputElement(element) {
             this.classList.remove('rtl-input-active');
         }
     });
-    
+
     // Handle paste events
-    element.addEventListener('paste', function() {
+    element.addEventListener('paste', function () {
         // Use setTimeout to check the value after paste is complete
         setTimeout(() => {
             if (isPersianOrArabic(this.value) && startsWithPersianOrArabic(this.value)) {
@@ -244,17 +247,17 @@ function setupInputElement(element) {
 // Setup event handlers for a contenteditable element
 function setupEditableElement(element) {
     if (!element || element.hasAttribute('data-rtl-listener')) return;
-    
+
     // Mark this element as processed
     element.setAttribute('data-rtl-listener', 'true');
-    
+
     // Check if the element already has Persian/Arabic text that starts with Persian/Arabic
     if (isPersianOrArabic(element.textContent) && startsWithPersianOrArabic(element.textContent)) {
         element.setAttribute('data-rtl', 'true');
     }
-    
+
     // Add input event listeners for real-time RTL detection
-    element.addEventListener('input', function() {
+    element.addEventListener('input', function () {
         if (isPersianOrArabic(this.textContent) && startsWithPersianOrArabic(this.textContent)) {
             this.setAttribute('data-rtl', 'true');
         } else if (this.textContent.trim() === '') {
@@ -264,9 +267,9 @@ function setupEditableElement(element) {
             this.removeAttribute('data-rtl');
         }
     });
-    
+
     // Handle paste events
-    element.addEventListener('paste', function() {
+    element.addEventListener('paste', function () {
         // Use setTimeout to check the content after paste is complete
         setTimeout(() => {
             if (isPersianOrArabic(this.textContent) && startsWithPersianOrArabic(this.textContent)) {
@@ -286,23 +289,23 @@ function applyRTL(element) {
         const text = element.textContent.trim();
         if (isPersianOrArabic(text) && startsWithPersianOrArabic(text)) {
             let currentElement = element.parentElement;
-            
+
             // Special handling for input and textarea elements
             if (currentElement.tagName === 'INPUT' || currentElement.tagName === 'TEXTAREA') {
                 setupInputElement(currentElement);
                 return;
             }
-            
+
             // Special handling for contenteditable elements
             if (currentElement.hasAttribute('contenteditable')) {
                 setupEditableElement(currentElement);
                 return;
             }
-            
+
             // Traverse up to find the most appropriate container
             while (currentElement &&
-                   currentElement !== document.body &&
-                   currentElement.children.length <= 1) {
+                currentElement !== document.body &&
+                currentElement.children.length <= 1) {
                 currentElement.setAttribute('data-rtl', 'true');
                 currentElement = currentElement.parentElement;
             }
@@ -312,16 +315,16 @@ function applyRTL(element) {
         }
     } else if (element.nodeType === Node.ELEMENT_NODE) {
         // Check title attribute
-        if (element.hasAttribute('title') && isPersianOrArabic(element.getAttribute('title')) && 
+        if (element.hasAttribute('title') && isPersianOrArabic(element.getAttribute('title')) &&
             startsWithPersianOrArabic(element.getAttribute('title'))) {
             element.setAttribute('data-rtl', 'true');
         }
-        
+
         // Check placeholder attribute for input elements
         if ((element.tagName === 'INPUT' || element.tagName === 'TEXTAREA')) {
             setupInputElement(element);
         }
-        
+
         // Check contenteditable elements
         if (element.hasAttribute('contenteditable')) {
             setupEditableElement(element);
@@ -342,7 +345,7 @@ function processDocument() {
 function setupObservers() {
     const observer = new MutationObserver(mutations => {
         if (!isEnabled) return;
-        
+
         mutations.forEach(mutation => {
             if (mutation.type === 'childList') {
                 mutation.addedNodes.forEach(node => applyRTL(node));
@@ -371,10 +374,10 @@ function setupObservers() {
 }
 
 // Listen for messages from the popup or background script
-chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
+browserAPI.runtime.onMessage.addListener((message, sender, sendResponse) => {
     if (message.action === 'toggleSite') {
         isEnabled = message.enabled;
-        
+
         if (isEnabled) {
             addStyles();
             processDocument();
@@ -385,13 +388,13 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
                 el.removeAttribute('data-rtl');
                 el.classList.remove('rtl-input-active');
             });
-            
+
             // Remove style element
             const styleEl = document.getElementById(SCRIPT_ID);
             if (styleEl) styleEl.remove();
         }
     }
-    
+
     sendResponse({ success: true });
 });
 

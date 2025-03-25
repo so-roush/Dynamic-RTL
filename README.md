@@ -21,13 +21,41 @@ A Chrome extension that automatically detects Persian/Arabic text on web pages a
 2. Search for "Dynamic RTL"
 3. Click "Add to Chrome"
 
+### From Firefox Add-ons (Coming Soon)
+
+1. Visit the Firefox Add-ons website
+2. Search for "Dynamic RTL"
+3. Click "Add to Firefox"
+
 ### Manual Installation
+
+#### Chrome
 
 1. Download or clone this repository
 2. Open Chrome and navigate to `chrome://extensions/`
 3. Enable "Developer mode" in the top right corner
 4. Click "Load unpacked" and select the folder containing the extension files
 5. The extension should now be installed and active
+
+#### Firefox
+
+1. Download or clone this repository
+2. For Firefox installation, you need to use the Firefox-specific manifest file:
+   - Rename `manifest-firefox.json` to `manifest.json` temporarily (or make a copy with this name)
+   - Or directly load the `manifest-firefox.json` file in the next step
+3. Open Firefox and navigate to `about:debugging#/runtime/this-firefox`
+4. Click "Load Temporary Add-on"
+5. Navigate to the extension folder and select the `manifest.json` or `manifest-firefox.json` file
+6. The extension should now be installed and active (note: this is a temporary installation that will be removed when Firefox is closed)
+
+**Important Note**: If you want to use the extension in both Chrome and Firefox, keep separate copies of the extension folder with the appropriate manifest file for each browser.
+
+For permanent installation in Firefox:
+1. Make sure you're using the Firefox manifest file (`manifest-firefox.json` renamed to `manifest.json`)
+2. Package the extension as a ZIP file
+3. Visit `about:addons`
+4. Click the gear icon and select "Install Add-on From File"
+5. Select the ZIP file you created
 
 ## Usage
 
@@ -64,6 +92,9 @@ To switch between these two modes:
 
 ## Recent Improvements
 
+### Version 1.2.0
+- Added support for Firefox
+
 ### Version 1.1.0
 - Changed the default mode selection from toggle switch to radio buttons
 - Added X (Twitter) profile link
@@ -87,6 +118,7 @@ This project is open source and available under the MIT License.
 
 - Original script by Sorou-sh
 - Vazirmatn font by Saber Rastikerdar
+- Added Firefox compatibility by [sadegh19b](https://github.com/sadegh19b)
 
 ## Language
 
