@@ -94,6 +94,7 @@ To switch between these two modes:
 
 ### Version 1.2.0
 - Added support for Firefox
+- Improved Persian/Arabic text detection
 
 ### Version 1.1.0
 - Changed the default mode selection from toggle switch to radio buttons
