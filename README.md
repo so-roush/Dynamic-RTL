@@ -2,7 +2,7 @@
 
 Shows Persian and Arabic text right to left, in the Vazirmatn font, on any website. Works with AI chats (ChatGPT, Claude, Gemini and others), X, Instagram and any page that mixes English with Persian or Arabic.
 
-[![Version](https://img.shields.io/badge/version-4.0.1-e39a12)](#install)
+[![Version](https://img.shields.io/badge/version-4.0.2-e39a12)](#install)
 [![License: MIT](https://img.shields.io/badge/License-MIT-lightgrey.svg)](LICENSE)
 
 <p>
@@ -27,6 +27,7 @@ Shows Persian and Arabic text right to left, in the Vazirmatn font, on any websi
 
 ## What's new in 4.0
 
+- 4.0.2: Firefox build gets its own add-on ID for addons.mozilla.org and needs Firefox 140 or newer.
 - 4.0.1: Persian text now gets the font on sites that set their own font on inner spans, like YouTube comments, X and Instagram.
 - Much lighter. On a page with no Persian or Arabic the script does one native text check and goes quiet. Measured against 3.2 it uses 2 to 9 times less script time (see [Performance](#performance)).
 - The font no longer loads late. It is registered at `document_start` and warmed up the moment Arabic script appears.
@@ -42,18 +43,18 @@ Download the zip for your browser from the [Releases page](https://github.com/so
 
 **Chrome, Edge, Brave, Arc, Opera**
 
-1. Unzip `dynamic-rtl-chrome-v4.0.1.zip`.
+1. Unzip `dynamic-rtl-chrome-v4.0.2.zip`.
 2. Open `chrome://extensions` and turn on Developer mode.
 3. Click Load unpacked and pick the folder.
 
-**Firefox** (128 or newer)
+**Firefox** (140 or newer)
 
 - Temporary: open `about:debugging#/runtime/this-firefox`, click Load Temporary Add-on and pick `manifest.json` inside the unzipped folder. It stays until Firefox restarts.
 - Permanent on Developer Edition, Nightly or ESR: set `xpinstall.signatures.required` to `false` in `about:config`, rename the zip to `.xpi` and drop it on Firefox.
 
 **Safari** (26 or newer)
 
-Unzip `dynamic-rtl-safari-v4.0.1.zip`, then Settings, Developer, Add Temporary Extension and pick the folder. Enable it under Settings, Extensions. It unloads when Safari quits.
+Unzip `dynamic-rtl-safari-v4.0.2.zip`, then Settings, Developer, Add Temporary Extension and pick the folder. Enable it under Settings, Extensions. It unloads when Safari quits.
 
 ## Use
 

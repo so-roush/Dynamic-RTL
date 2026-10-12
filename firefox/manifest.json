@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "Dynamic RTL",
-  "version": "4.0.1",
+  "version": "4.0.2",
   "description": "__MSG_extDescription__",
   "author": "soroush5",
   "homepage_url": "https://github.com/soroush5/Dynamic-RTL",
@@ -79,8 +79,8 @@
   ],
   "browser_specific_settings": {
     "gecko": {
-      "id": "dynamic-rtl@soroush5.github.io",
-      "strict_min_version": "128.0",
+      "id": "dynamic-rtl@soroush5",
+      "strict_min_version": "140.0",
       "data_collection_permissions": {
         "required": [
           "none"

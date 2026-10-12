@@ -36,18 +36,18 @@
 
 **کروم، اج، بریو، آرک و اپرا**
 
-1. فایل `dynamic-rtl-chrome-v4.0.1.zip` را از حالت فشرده خارج کنید.
+1. فایل `dynamic-rtl-chrome-v4.0.2.zip` را از حالت فشرده خارج کنید.
 2. به `chrome://extensions` بروید و Developer mode را روشن کنید.
 3. روی Load unpacked بزنید و پوشه را انتخاب کنید.
 
-**فایرفاکس** (۱۲۸ به بالا)
+**فایرفاکس** (۱۴۰ به بالا)
 
 - موقت: در `about:debugging#/runtime/this-firefox` روی Load Temporary Add-on بزنید و `manifest.json` داخل پوشه را انتخاب کنید. تا بستن فایرفاکس فعال می‌ماند.
 - دائمی در نسخه‌های Developer Edition، Nightly یا ESR: در `about:config` مقدار `xpinstall.signatures.required` را `false` کنید، پسوند زیپ را به `.xpi` تغییر دهید و آن را روی فایرفاکس بکشید.
 
 **سافاری** (۲۶ به بالا)
 
-فایل `dynamic-rtl-safari-v4.0.1.zip` را باز کنید، سپس از Settings، بخش Developer، گزینه Add Temporary Extension را بزنید و پوشه را انتخاب کنید. بعد در Settings، بخش Extensions فعالش کنید. با بستن سافاری غیرفعال می‌شود.
+فایل `dynamic-rtl-safari-v4.0.2.zip` را باز کنید، سپس از Settings، بخش Developer، گزینه Add Temporary Extension را بزنید و پوشه را انتخاب کنید. بعد در Settings، بخش Extensions فعالش کنید. با بستن سافاری غیرفعال می‌شود.
 
 ## استفاده
 
