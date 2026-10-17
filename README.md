@@ -7,7 +7,7 @@ Shows Persian and Arabic text right to left, in the Vazirmatn font, on any websi
 
 <p>
   <a href="https://github.com/soroush5/Dynamic-RTL/releases/latest/download/dynamic-rtl-chrome-latest.zip"><img src="https://img.shields.io/badge/Download-Chrome-4285F4?style=for-the-badge&logo=googlechrome&logoColor=white" alt="Download for Chrome"></a>
-  <a href="https://github.com/soroush5/Dynamic-RTL/releases/latest/download/dynamic-rtl-firefox-latest.zip"><img src="https://img.shields.io/badge/Download-Firefox-FF7139?style=for-the-badge&logo=firefox&logoColor=white" alt="Download for Firefox"></a>
+  <a href="https://addons.mozilla.org/firefox/addon/dynamic-rtl/"><img src="https://img.shields.io/badge/Get_it_on-Firefox-FF7139?style=for-the-badge&logo=firefox&logoColor=white" alt="Get it on Firefox Add-ons"></a>
   <a href="https://github.com/soroush5/Dynamic-RTL/releases/latest/download/dynamic-rtl-safari-latest.zip"><img src="https://img.shields.io/badge/Download-Safari-000000?style=for-the-badge&logo=safari&logoColor=white" alt="Download for Safari"></a>
 </p>
 
@@ -49,8 +49,7 @@ Download the zip for your browser from the [Releases page](https://github.com/so
 
 **Firefox** (140 or newer)
 
-- Temporary: open `about:debugging#/runtime/this-firefox`, click Load Temporary Add-on and pick `manifest.json` inside the unzipped folder. It stays until Firefox restarts.
-- Permanent on Developer Edition, Nightly or ESR: set `xpinstall.signatures.required` to `false` in `about:config`, rename the zip to `.xpi` and drop it on Firefox.
+Install it from [Firefox Add-ons](https://addons.mozilla.org/firefox/addon/dynamic-rtl/). It updates by itself.
 
 **Safari** (26 or newer)
 

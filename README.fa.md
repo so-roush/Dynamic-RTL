@@ -4,7 +4,7 @@
 
 <p>
   <a href="https://github.com/soroush5/Dynamic-RTL/releases/latest/download/dynamic-rtl-chrome-latest.zip"><img src="https://img.shields.io/badge/Download-Chrome-4285F4?style=for-the-badge&logo=googlechrome&logoColor=white" alt="Download for Chrome"></a>
-  <a href="https://github.com/soroush5/Dynamic-RTL/releases/latest/download/dynamic-rtl-firefox-latest.zip"><img src="https://img.shields.io/badge/Download-Firefox-FF7139?style=for-the-badge&logo=firefox&logoColor=white" alt="Download for Firefox"></a>
+  <a href="https://addons.mozilla.org/firefox/addon/dynamic-rtl/"><img src="https://img.shields.io/badge/Get_it_on-Firefox-FF7139?style=for-the-badge&logo=firefox&logoColor=white" alt="Get it on Firefox Add-ons"></a>
   <a href="https://github.com/soroush5/Dynamic-RTL/releases/latest/download/dynamic-rtl-safari-latest.zip"><img src="https://img.shields.io/badge/Download-Safari-000000?style=for-the-badge&logo=safari&logoColor=white" alt="Download for Safari"></a>
 </p>
 
@@ -42,8 +42,7 @@
 
 **فایرفاکس** (۱۴۰ به بالا)
 
-- موقت: در `about:debugging#/runtime/this-firefox` روی Load Temporary Add-on بزنید و `manifest.json` داخل پوشه را انتخاب کنید. تا بستن فایرفاکس فعال می‌ماند.
-- دائمی در نسخه‌های Developer Edition، Nightly یا ESR: در `about:config` مقدار `xpinstall.signatures.required` را `false` کنید، پسوند زیپ را به `.xpi` تغییر دهید و آن را روی فایرفاکس بکشید.
+از [افزونه‌های فایرفاکس](https://addons.mozilla.org/firefox/addon/dynamic-rtl/) نصبش کنید. خودش به‌روز می‌شود.
 
 **سافاری** (۲۶ به بالا)
 
